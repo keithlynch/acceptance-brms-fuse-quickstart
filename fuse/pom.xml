@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>${project.groupId}.${project.artifactId}</name>
+	<parent>
+	    <groupId>org.jboss.super</groupId>
+	    <artifactId>project</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>fuse</artifactId>
+	<packaging>pom</packaging>
+	
+	<properties>
+		<camel.version>2.10.0.redhat-60024</camel.version>
+	</properties>
+	
+	<modules>
+		<module>features</module>
+		
+		<module>service1</module>
+		<module>service1-spec</module>
+	</modules>
+</project>

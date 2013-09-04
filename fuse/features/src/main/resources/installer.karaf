@@ -1,0 +1,45 @@
+##########################################
+### Ensure Fabric commands are present ###
+##########################################
+
+wait-for-service org.apache.karaf.features.FeaturesService
+
+################
+### MQBroker ###
+################
+
+#import -v -t /fabric/configs/versions/1.0/profiles/mq-base/xxx-broker.xml xxx/xxx-broker.xml
+#fabric:mq-create --create-container xxx-broker --config xxx-broker.xml xxx-mq-profile
+#fabric:profile-edit --pid org.fusesource.mq.fabric.server-xxx-mq-profile/openwire-port=61616 xxx-mq-profile
+#fabric:profile-edit --pid org.fusesource.mq.fabric.server-xxx-mq-profile/broker-name=xxx xxx-mq-profile
+#fabric:profile-edit --pid org.fusesource.mq.fabric.server-xxx-mq-profile/group=xxxphone-broker xxx-mq-profile
+#fabric:profile-edit --pid org.ops4j.pax.web/org.osgi.service.http.port=8013 xxx-mq-profile
+#fabric:profile-edit -r mvn:io.hawt/hawtio-karaf/${hawtio.version}/xml/features xxx-mq-profile
+#fabric:profile-edit --features hawtio xxx-mq-profile
+##fabric:container-add-profile xxx-broker hawtio
+
+
+#features:addurl mvn:io.hawt/hawtio-karaf/${hawtio.version}/xml/features
+features:addurl mvn:org.jboss.super.fuse/features/${project.version}/xml/features
+features:addurl mvn:org.jboss.fuse/drools-features/5.3.1.BRMS/xml/features
+features:install -v esb-features
+
+
+################
+### Profiles ###
+################
+
+#fabric:profile-create --parents default --parents camel esb-profile
+#fabric:profile-edit -r mvn:org.jboss.super.fuse/features/${project.version}/xml/features esb-profile
+#fabric:profile-edit -r mvn:io.hawt/hawtio-karaf/${hawtio.version}/xml/features esb-profile
+#fabric:profile-edit -r mvn:org.jboss.fuse/drools-features/5.3.1.BRMS/xml/features esb-profile
+#fabric:profile-edit --features esb-features esb-profile
+#fabric:profile-edit --pid org.ops4j.pax.web/org.osgi.service.http.port=8012 esb-profile
+
+##################
+### Containers ###
+##################
+
+#fabric:container-create-child --jvm-opts "-XX:MaxPermSize=1024M" --profile esb-profile root esb-container
+
+
