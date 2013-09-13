@@ -14,6 +14,7 @@ Feature: example feature
        {"human":true,"likesBeer":false,"name":"Bob","additionalProperties":{}}
        """
 
+GET THIS REMOVED AND COMMITTED!
 
 #Scenario: Successfully processing a single language GB Cerillion Bill XML file through to StreamServe.
 #Given the invoice data service is deployed
